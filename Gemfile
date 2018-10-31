@@ -22,6 +22,7 @@ gem 'fog',                     '~> 1.23.0'
 gem 'net-ssh'
 gem 'devise'
 gem 'omniauth'
+gem 'mini_racer'
 gem 'redis'
 gem 'geocoder'
 gem 'gmaps4rails'
@@ -56,10 +57,9 @@ gem 'faker'
 gem 'layout', '~> 0.2.1'
 gem 'govuk_template', '~> 0.24.1'
 gem 'bootstrap_form', '~> 2.7'
-gem 'bootstrap', '~> 4.1', '>= 4.1.3'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'bootstrap-sass', '~> 3.2.0.2'
+gem 'bootstrap-sass', '3.2.0.2'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -87,6 +87,7 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
   gem 'database_cleaner'
+  gem 'rails-controller-testing'
   #gem 'capybara', '~> 3.9'
   #gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
   gem 'launchy', '~> 2.4', '>= 2.4.3'

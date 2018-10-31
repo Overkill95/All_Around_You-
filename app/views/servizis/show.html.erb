@@ -4,36 +4,6 @@
 <script src='//cdn.jsdelivr.net/gmaps4rails/2.1.2/gmaps4rails.js'> </script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js'> </script>
 
-  </span>
-  <span class="timestamp">
-    Creato: <%= time_ago_in_words(@servizi.created_at) %> ago.
-    <% if currentuser==@servizi.user %>
-      <%= link_to "Cancella", cancellaservizi_path(@servizi) %>
-    <% end %>
-  </span>
-  <span class="aggiungi">
-  <%= link_to "Aggiungi preferiti", aggiungi_path(@servizi.id) %>
-  </span>
-  <div class="row-md-8" align="left">
-    <% if @servizi.recensionis.any? %>
-      <h3>Numero Recensioni: (<%= @servizi.recensionis.count %>)</h3>
-      <ol class="recensioni">
-         <%= render @servizi.recensionis %>
-      </ol>
-      <%= will_paginate @recensionis %>
-    <% end %>
-  </div>
-
-      </section>
-  <div class="row-md-8" align="right">
-    <% if @servizi.domandes.any? %>
-      <h3>Numero Domande: (<%= @servizi.domandes.count %>)</h3>
-      <ol class="domande">
-         <%= render @servizi.domandes %>
-      </ol>
-      <%= will_paginate @domandes %>
-    <% end %>
-  </div>
   <style>
   @import url('https://fonts.googleapis.com/css?family=Merriweather');
 
@@ -41,12 +11,6 @@
 	color:#B22222;
 	font-family: 'Merriweather', serif;
     }
-	#map
-{
-right: 0;
-bottom: -70;
-position: absolute;
-}
     #Servizi{
     font-family: 'Merriweather', serif;
     }
@@ -127,7 +91,16 @@ position: absolute;
 
 
       <br>
-
+      </section>
+  <div class="row-md-8" align="bottom-left">
+    <% if @servizi.domandes.any? %>
+      <h3>Numero Domande: (<%= @servizi.domandes.count %>)</h3>
+      <ol class="domande">
+         <%= render @servizi.domandes %>
+      </ol>
+      <%= will_paginate @domandes %>
+    <% end %>
+  </div>
       <div id='div_form'>
 
 	    <section class="domande_form">
@@ -145,7 +118,7 @@ position: absolute;
     </div>
 
 	<div style='width: 800px;' >
-            <div id='map' style='width: 400px; height: 400px; '></div>
+            <div id='map' align="right" style='width: 400px; height: 400px; '></div>
         </div>
 <script type="text/javascript">
 handler = Gmaps.build('Google');

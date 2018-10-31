@@ -2,7 +2,7 @@
 # note: require 'devise' after require 'rspec/rails'
 require 'devise'
 require_relative 'spec_helper'
-
+require_relative './controllers/controller_macros'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
