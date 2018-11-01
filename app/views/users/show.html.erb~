@@ -74,7 +74,7 @@
 
       <div class="col-md-8">
 	  <% if @user.servizis.any? %>
-	    <h3>Numero Servizi: <%= @user.servizis.count %></h3>
+	    <h3>Numero Servizi: (<%= @user.servizis.count %>)</h3>
 	    <ol class="servizi">
 	      <div id='div02'>
 	      <%= render @user.servizis %>
