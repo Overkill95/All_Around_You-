@@ -5,6 +5,7 @@
 <script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js'> </script>
 
   <style>
+
   @import url('https://fonts.googleapis.com/css?family=Merriweather');
 
     h1{
@@ -20,40 +21,103 @@
 	    color: black;
 	    width: 500px;
 	    margin: left;
-	    border: 2px solid black;
+	    border: 3px solid red;
 	    position: relative;
 	    overflow: auto;
 	    text-align: left;
-	    padding: 10px 10px;
-	    border-radius: 10px 10px 10px 10px;
+        border-radius: 5px;
+        padding: 20px;
     }
 
+
+    input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #3CBC8D;
+    color: white;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type=text]:focus {
+    background-color: lightblue;
+}
+.my-btn {
+    background-color:transparent;
+    border: none;
+    color: #ff4d4d;
+    padding: 7px 13px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.my-btn:hover {
+    color: #990000;
+}
+.servizitag {
+ background:url('https://dh3vbjnk0bnfa.cloudfront.net/static/centralauth/images/btn-login-hover.png') no-repeat 5px 5px #484B4F;
+  width: 100px;
+  height: 50px;
+  align: right
+  padding:10px 20px 10px 0;
+  border-radius: 20%;
+  border: 2px solid white;
+  color:White;
+  font-size:14px;
+  text-align:center;
+  font-weight: bold;
+  -webkit-transition-duration: 0.4s;
+  cursor: pointer;
+}
+.servizitag:hover {
+    background-color: black;
+}
+.mycontent{
+width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+
+
+}
+.button_to,
+.button_to div {
+  display: inline;
+  align:right;
+}
 
   </style>
 
 </head>
 
-<body bgcolor='#A9A9A9'>
+<body bgcolor='#f2f2f2'>
 
     <div id="Servizi  <%= @servizi.id %>">
-      <center><h1><span class="nome"><%= @servizi.nome %></span></h1></center>
+     <%= image_tag @servizi.immagini.url if @servizi.immagini? %>
+     <br><br>
+     <b> Nome: </b><%= @servizi.nome %>
+     <br><br>
+      <b>Tipo Servizio:</b><%= @servizi.tipo %>
       <br><br>
-      <b>Tipo Servizio:</b> <span class="tipo"><%= @servizi.tipo %></span>
+      <b>Descrizione: </b> <%= @servizi.descrizione %>
       <br><br>
-      <b>Descrizione: </b> <span class="content"><%= @servizi.descrizione %>
-      <br><br>
-      <span class="image"> <%= image_tag @servizi.immagini.url if @servizi.immagini? %> </span>
-      <br><br>
-      <span class="preferiti"> <%= link_to "Aggiungi ai preferiti", aggiungi_path(@servizi.id) %> </span>
-
-      </span>
-      <span class="timestamp">
-	Creato: <%= time_ago_in_words(@servizi.created_at) %> ago.
+      <b>Creato:</b> <%= time_ago_in_words(@servizi.created_at) %> ago
+    </div>
+    <br>
+    <br>
+    <%= button_to "+ Preferiti", aggiungi_path(@servizi.id), class: 'servizitag', method: :get %>
+    <br><br>
 	<% if currentuser==@servizi.user %>
-	  <%= link_to "Cancella", @servizi, :method => :delete,
-					  data: { confirm: "Sicuro?" } %>
+	 <b> Cancella: </b> <%= button_to "X", cancellaservizi_path(@servizi), class: 'my-btn', method: :get  %>
 	<% end %>
-      </span>
       <span class="aggiungi">
 
       </span>
@@ -82,7 +146,7 @@
 	  <br>
 	  <%=f.hidden_field 'servizi_id', :value => @servizi.id %>
 	  <div class="field">
-	    <%= f.text_area :content, id: 'recensionecontent', placeholder: "Scrivi recensione" %>
+	    <%= f.text_area :content, id: 'recensionecontent', class:'mycontent', placeholder: "Scrivi recensione" %>
 	  </div>
 	  <%= f.submit "Invia Recensione", class: "btn btn-primary" %>
 	  <% end %>
@@ -107,7 +171,7 @@
 	    <%= form_for(@domande) do |f| %>
 	    <%=f.hidden_field 'servizio_id', :value => @servizi.id %>
 	    <div class="field">
-	      <%= f.text_area :content, id: 'domandacontent', placeholder: "Scrivi domanda" %>
+	      <%= f.text_area :content, id: 'domandacontent', class: 'mycontent', placeholder: "Scrivi domanda" %>
 	    </div>
 	    <%= f.submit "Invia Domanda", class: "btn btn-primary" %>
 	    <% end %>

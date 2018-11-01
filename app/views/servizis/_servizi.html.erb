@@ -41,7 +41,7 @@
 .ico-mglass {
   position:relative;
   display:inline-block;
-  background: #8c8c8c;
+  background:white;
   border-radius: 30px;
   height: 15px;
   width: 15px;
@@ -68,8 +68,8 @@
 	    font-family: 'Merriweather', serif;
 	    width: 500px;
 	    margin: left;
-	    border: 3px solid #800000;
-	    color:white;
+	    border: 3px solid red;
+	    color:black;
 	    position: relative;
 	    overflow: auto;
 	    text-align: left;
@@ -83,11 +83,11 @@
 
 
  <div class="services">
- Nome: <%= servizi.nome %>
+ <b>Nome: </b> <%= servizi.nome %>
  <br>
- Indirizzo: <%= servizi.indirizzo %>
+ <b>Indirizzo:</b> <%= servizi.indirizzo %>
 <br>
- Creato: <%= time_ago_in_words(servizi.created_at) %> ago
+ <b>Creato:</b> <%= time_ago_in_words(servizi.created_at) %> ago
 </div>
     <% if currentuser==servizi.user %>
       <%= button_to "X", cancellaservizi_path(servizi), class: 'my-btn', method: :get  %>

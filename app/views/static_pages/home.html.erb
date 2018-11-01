@@ -21,7 +21,7 @@
 	    font-family: 'Merriweather', serif;
 	    width: 500px;
 	    margin: left;
-	    border: 3px solid #800000;
+	    border: 3px solid red;
 	    color:black;
 	    position: relative;
 	    overflow: auto;
@@ -34,7 +34,7 @@
 	    font-family: 'Merriweather', serif;
 	    width: 900px;
 	    margin: left;
-	    border: 3px solid #800000;
+	    border: 3px solid red;
 	    color:black;
 	    position: relative;
 	    overflow: auto;
@@ -47,7 +47,7 @@
 	    font-family: 'Merriweather', serif;
 	    width: 500px;
 	    margin: left;
-	    border: 3px solid #800000;
+	    border: 3px solid red;
 	    position: relative;
 	    overflow: auto;
 	    text-align: left;
@@ -75,12 +75,30 @@
 	    width: 150px;        /* larghezza           */
 	    border-radius: 10px 10px 10px 10px;
 	  }
+	.favoritebutton{
+	background:url('https://dh3vbjnk0bnfa.cloudfront.net/static/centralauth/images/btn-login-hover.png') no-repeat 5px 5px #484B4F;
+  	width: 120px;
+	height: 40px;
+ 	 align: right
+  	padding:10px 20px 10px 0;
+  	border-radius: 20%;
+  	border: 2px solid white;
+  	color:White;
+  	font-size:14px;
+  	text-align:center;
+  	font-weight: bold;
+  	-webkit-transition-duration: 0.4s;
+  	cursor: pointer;
+	}
+	.favoritebutton:hover {
+    background-color: black; 
+}
 
     </style>
 
    </head>
 
-   <body id='bd' bgcolor="#8c8c8c">
+   <body id='bd' bgcolor="#f2f2f2">
       <div id='div01' class="row" align="left">
 	<aside class="col-md-4">
 
@@ -109,7 +127,7 @@
 	<br>
 
 	<div class="col-md-8">
-	  <%= link_to "Mostra preferiti", preferiti_path %>
+	  <%= button_to "Mostra preferiti", preferiti_path, class: 'favoritebutton', method: :get %>
 	</div>
 
 	<br>
@@ -127,7 +145,7 @@
      <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
      <%= link_to servizis_path do %>
-       <i class="material-icons" style="font-size:37px;color:green">map</i>
+       <i class="material-icons" style="font-size:50px;color:red">map</i>
        <% end %>
        <br>
 	<br>
@@ -238,7 +256,7 @@
 
 
     </head>
-    <body bgcolor="#A9A9A9">
+    <body bgcolor="#f2f2f2">
         <center>
 
           <div id="par1">
