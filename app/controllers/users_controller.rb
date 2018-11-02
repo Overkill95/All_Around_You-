@@ -37,7 +37,8 @@ class UsersController < ApplicationController
   end
   def rendiadmin
     @user=User.find_by(id: params[:id])
-    @user.admin=true
+    @user.update_attributes(:admin=> true)
+    redirect_to users_path
   end
   # POST /users
   # POST /users.json

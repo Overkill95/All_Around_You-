@@ -1,7 +1,61 @@
+<style>
+
+.my-btn {
+    background-color:transparent;
+    border: none;
+    color: #ff4d4d;
+    padding: 7px 13px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.my-btn:hover {
+    color: #990000;
+}
+
+.profilo {
+ background:url('https://dh3vbjnk0bnfa.cloudfront.net/static/centralauth/images/btn-login-hover.png') no-repeat 5px 5px #484B4F;
+  width: 100px;
+  height: 50px;
+  align: right
+  padding:10px 20px 10px 0;
+  border-radius: 20%;
+  border: 2px solid white;
+  color:White;
+  font-size:14px;
+  text-align:center;
+  font-weight: bold;
+  -webkit-transition-duration: 0.4s;
+  cursor: pointer;
+}
+.profilo:hover {
+    background-color: black;
+}
+.button_to,
+.button_to div {
+  display: inline;
+  align:right;
+}
+.admin{
+  color:green;
+}
+</style>
 <li>
-  <%= gravatar_for user%>
-  <%= link_to user.name, user %>
+  <span><%= gravatar_for user%> </span>
+  <span><b> Nickname: </b> <%= user.name %></span>
+  <span class="admin">
+  <% if user.admin? %>
+  <b> Admin </b>
+  <% end %>
+  </span>
+  <br>
+  <%= button_to "profilo", user, class: 'profilo', method: :get %>
+  <% if currentuser.admin? && currentuser!=user %>
+    <%= button_to "Make Admin", rendiadmin_path(user), class: 'profilo', method: :get  %>
+  <% end %>
   <% if currentuser.admin? || currentuser==user %>
-    <%= link_to "delete", cancellautente_path(user)  %>
+    <%= button_to "X", cancellautente_path(user), class: 'my-btn', method: :get  %>
   <% end %>
 </li>
+<br>
+<br>

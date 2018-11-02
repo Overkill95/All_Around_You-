@@ -13,7 +13,7 @@ class FavoritesController < ApplicationController
             redirect_to preferiti_path
          else
             flash[:danger] = "Preferito non aggiunto"
-            render @servizio
+            redirect_to @servizio
          end
         end
     end

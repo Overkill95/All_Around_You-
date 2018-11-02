@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
   get    'servizis/:id/Aggpref'  => 'favorites#create', as: 'aggiungi'
+  get    'users/:id/Admin'       =>  'users#rendiadmin', as: 'rendiadmin'
   get    'favorites/:id/cancella' => 'favorites#destroy', as: 'cancellapreferiti'
   get    '/preferiti'          => 'users#listapreferiti', as: 'preferiti'
   get    '/domande/:id/cancella' => 'domandes#destroy', as: 'cancelladomande'
