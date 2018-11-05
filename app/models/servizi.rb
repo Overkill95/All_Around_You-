@@ -6,6 +6,7 @@ class Servizi < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :recensionis, dependent: :destroy
   has_many :domandes, dependent: :destroy
+  has_many :votiservizis, dependent: :destroy
   default_scope -> { order(created_at: :desc)
   }
   mount_uploader :immagini, ImmaginiUploader

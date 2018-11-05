@@ -3,7 +3,7 @@
   <style>
     #mipiacecount {
     color: green;
-    font-size: 60px;
+    font-size: 40px;
     user-select: none;
 }
 i[id^="mipiacebtn"] {
@@ -47,7 +47,7 @@ i[id^="nonmipiacebtn"]:hover{
     }
 #nonmipiacecount {
     color: red;
-    font-size: 60px;
+    font-size: 40px;
     user-select: none;
 }
 
@@ -101,8 +101,8 @@ i[id^="nonmipiacebtn"]:hover{
   <br>
   <%= domande.content %>
   <br>
-  <i class="fa fa-thumbs-up" id="mipiacecount"></i>  <b><font size="50"><%= domande.voti_ds.where("voto=?", true).count %></font></b>
-  <i class="fa fa-thumbs-down" id="nonmipiacecount"></i>  <b><font size="50"><%= domande.voti_ds.where("voto=?", false).count %></font> </b>
+  <i class="fa fa-thumbs-up" id="mipiacecount"></i>  <b><font size="6"><%= domande.voti_ds.where("voto=?", true).count %></font></b>
+  <i class="fa fa-thumbs-down" id="nonmipiacecount"></i>  <b><font size="6"><%= domande.voti_ds.where("voto=?", false).count %></font> </b>
   <% if domande.rispostes.any? %>
                  <h3>Numero Risposte: <%= domande.rispostes.count %></h3>
                 <%= render domande.rispostes %>

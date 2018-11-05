@@ -26,17 +26,17 @@
   -webkit-transition-duration: 0.4s;
   cursor: pointer;
 }
-#mipiacecount {
+#mipiacecountr {
     color: green;
     font-size: 30px;
     user-select: none;
 }
-#nonmipiacecount {
+#nonmipiacecountr {
     color: red;
     font-size: 30px;
     user-select: none;
 }
-i[id^="mipiacebtn"] {
+i[id^="mipiacebtnr"] {
     color: green;
     font-size: 25px;
     user-select: none;
@@ -49,17 +49,17 @@ i[id^="mipiacebtn"] {
 #nonmipiacepressed {
     color:#660000;
 }
-i[id^="mipiacebtn"]:hover{
+i[id^="mipiacebtnr"]:hover{
     color:#003311;
     font-size: 25px;
     user-select: none;
 }
-i[id^="nonmipiacebtn"]{
+i[id^="nonmipiacebtnr"]{
     color: red;
     font-size: 25px;
     user-select: none;
 }
-i[id^="nonmipiacebtn"]:hover{
+i[id^="nonmipiacebtnr"]:hover{
     color:#660000;
 }
 .usertag:hover {
@@ -89,22 +89,22 @@ i[id^="nonmipiacebtn"]:hover{
   <br>
   <%= risposte.content %>
   <br>
-  <i class="fa fa-thumbs-up" id="mipiacecount"></i>  <b><font size="10"><%= risposte.voti_rs.where("voto=?", true).count %></font></b>
+  <i class="fa fa-thumbs-up" id="mipiacecountr"></i>  <b><font size="4"><%= risposte.voti_rs.where("voto=?", true).count %></font></b>
 <br>
-  <i class="fa fa-thumbs-down" id="nonmipiacecount"></i>  <b><font size="10"><%= risposte.voti_rs.where("voto=?", false).count %></font> </b>
+  <i class="fa fa-thumbs-down" id="nonmipiacecountr"></i>  <b><font size="4"><%= risposte.voti_rs.where("voto=?", false).count %></font> </b>
   </div>
   <% if currentuser.admin? || currentuser==risposte.user %>
       <%= button_to "X", cancellarisposte_path(risposte.id), class: 'my-btn', method: :get %>
     <% end %>
   <%= link_to vote_answer_path(risposte.user.id,risposte.id, 1) do %>
-  <i class="fa fa-thumbs-up" id="mipiacebtn<%= risposte.id.to_s %>"> </i>
+  <i class="fa fa-thumbs-up" id="mipiacebtnr<%= risposte.id.to_s %>"> </i>
   <% end %>
-  <%= link_to vote_question_path(risposte.user.id,risposte.id, 0) do %>
-  <i class="fa fa-thumbs-down" id="nonmipiacebtn<%= risposte.id.to_s %>"></i>
+  <%= link_to vote_answer_path(risposte.user.id,risposte.id, 0) do %>
+  <i class="fa fa-thumbs-down" id="nonmipiacebtnr<%= risposte.id.to_s %>"></i>
   <% end %>
    <%= javascript_tag do %>
-    var btnlike=document.getElementById("mipiacebtn<%= risposte.id.to_s %>" );
-    var btndislike=document.getElementById("nonmipiacebtn<%= risposte.id.to_s %>" );
+    var btnlike=document.getElementById("mipiacebtnr<%= risposte.id.to_s %>" );
+    var btndislike=document.getElementById("nonmipiacebtnr<%= risposte.id.to_s %>" );
 
     <% if !risposte.voti_rs.find_by(:user_id => currentuser.id).nil? %>
        <% if !risposte.voti_rs.find_by(:user_id => currentuser.id).voto %>

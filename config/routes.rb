@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get    '/users/:id/cancella'      =>  'users#destroy', as: 'cancellautente'
   get    '/domanda/:user_id/:domanda_id/:voto'     => 'voti_ds#create', as: 'vote_question'
   get    '/risposta/:user_id/:risposta_id/:voto'     => 'voti_rs#create', as: 'vote_answer'
+  get    '/servizi/:user_id/:servizi_id/:voto'     => 'votiservizis#create', as: 'vote_servizio' 
   resources :users,                only: [:edit, :index, :update, :show, :new, :create]
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]

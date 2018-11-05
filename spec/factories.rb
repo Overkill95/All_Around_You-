@@ -1,4 +1,14 @@
 FactoryGirl.define do
+  factory :votiservizi do
+    voto false
+    user nil
+    servizi nil
+  end
+  factory :voti_, class: 'VotiS' do
+    voto false
+    user nil
+    servizio nil
+  end
   factory :voti_r do
     voto 1
     user nil

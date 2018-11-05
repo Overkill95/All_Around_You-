@@ -3,7 +3,8 @@
 <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
 <script src='//cdn.jsdelivr.net/gmaps4rails/2.1.2/gmaps4rails.js'> </script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js'> </script>
-
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
 
   @import url('https://fonts.googleapis.com/css?family=Merriweather');
@@ -107,6 +108,42 @@ width: 100%;
   display: inline;
   align:right;
 }
+#mipiacecounts {
+    color: green;
+    font-size: 45px;
+    user-select: none;
+}
+#nonmipiacecounts {
+    color: red;
+    font-size: 45px;
+    user-select: none;
+}
+i[id^="mipiacebtns"] {
+    color: green;
+    font-size: 35px;
+    user-select: none;
+}
+#mipiacepressed {
+    color: #003311;
+    font-size: 35px;
+    user-select: none;
+}
+#nonmipiacepressed {
+    color:#660000;
+}
+i[id^="mipiacebtns"]:hover{
+    color:#003311;
+    font-size: 35px;
+    user-select: none;
+}
+i[id^="nonmipiacebtns"]{
+    color: red;
+    font-size: 35px;
+    user-select: none;
+}
+i[id^="nonmipiacebtns"]:hover{
+    color:#660000;
+}
 
   </style>
 
@@ -128,9 +165,31 @@ width: 100%;
       <b>Creato:</b> <%= time_ago_in_words(@servizi.created_at) %> ago
     </div>
     <br>
-    <br>
+    <i class="fa fa-thumbs-up" id="mipiacecounts"></i>  <b><font size="10"><%= @servizi.votiservizis.where("voto=?", true).count %></font></b>
+   <br>
+  <i class="fa fa-thumbs-down" id="nonmipiacecounts"></i>  <b><font size="10"><%= @servizi.votiservizis.where("voto=?", false).count %></font> </b>
+    <br> <br>
     <%= button_to "+ Preferiti", aggiungi_path(@servizi.id), class: 'servizitag', method: :get %>
     <br><br>
+     <%= link_to vote_servizio_path(@servizi.user.id,@servizi.id, 1) do %>
+  <i class="fa fa-thumbs-up" id="mipiacebtns<%= @servizi.id.to_s %>"> </i>
+  <% end %>
+  <%= link_to vote_servizio_path(@servizi.user.id,@servizi.id, 0) do %>
+  <i class="fa fa-thumbs-down" id="nonmipiacebtns<%= @servizi.id.to_s %>"></i>
+  <% end %>
+   <%= javascript_tag do %>
+    var btnlike=document.getElementById("mipiacebtns<%= @servizi.id.to_s %>" );
+    var btndislike=document.getElementById("nonmipiacebtns<%= @servizi.id.to_s %>" );
+
+    <% if !@servizi.votiservizis.find_by(:user_id => currentuser.id).nil? %>
+       <% if !@servizi.votiservizis.find_by(:user_id => currentuser.id).voto %>
+             btndislike.style.color="black";
+      <% else %>
+             btnlike.style.color="black";
+     <% end %>
+    <% end %>
+  <% end %>
+  <br><br>
 	<% if currentuser.admin? || currentuser==@servizi.user %>
 	 <b> Cancella: </b> <%= button_to "X", cancellaservizi_path(@servizi), class: 'my-btn', method: :get  %>
 	<% end %>

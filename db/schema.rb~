@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20181024100948) do
+ActiveRecord::Schema.define(version: 20181105170057) do
 
   create_table "domandes", force: :cascade do |t|
     t.text "content"
@@ -45,6 +44,7 @@ ActiveRecord::Schema.define(version: 20181024100948) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["servizi_id"], name: "index_recensionis_on_servizi_id"
+    t.index ["user_id", "servizi_id"], name: "index_recensionis_on_user_id_and_servizi_id", unique: true
     t.index ["user_id"], name: "index_recensionis_on_user_id"
   end
 
@@ -92,6 +92,8 @@ ActiveRecord::Schema.define(version: 20181024100948) do
     t.string "immagini"
     t.float "latitude"
     t.float "longitude"
+    t.integer "numvoti", default: 0
+    t.integer "mediavoti", default: 0
     t.index ["user_id", "created_at"], name: "index_servizis_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_servizis_on_user_id"
   end
@@ -122,6 +124,36 @@ ActiveRecord::Schema.define(version: 20181024100948) do
     t.string "google_token"
     t.string "google_refresh_token"
     t.index ["activation_token"], name: "index_users_on_activation_token"
+  end
+
+  create_table "voti_ds", force: :cascade do |t|
+    t.boolean "voto"
+    t.integer "user_id"
+    t.integer "domande_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["domande_id"], name: "index_voti_ds_on_domande_id"
+    t.index ["user_id"], name: "index_voti_ds_on_user_id"
+  end
+
+  create_table "voti_rs", force: :cascade do |t|
+    t.boolean "voto"
+    t.integer "user_id"
+    t.integer "risposte_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["risposte_id"], name: "index_voti_rs_on_risposte_id"
+    t.index ["user_id"], name: "index_voti_rs_on_user_id"
+  end
+
+  create_table "voti_ss", force: :cascade do |t|
+    t.boolean "voto"
+    t.integer "user_id"
+    t.integer "servizio_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["servizio_id"], name: "index_voti_ss_on_servizio_id"
+    t.index ["user_id"], name: "index_voti_ss_on_user_id"
   end
 
 end
