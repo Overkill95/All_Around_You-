@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :voti_r do
+    voto 1
+    user nil
+    risposte nil
+  end
   factory :voti_d do
     voto 1
     user nil

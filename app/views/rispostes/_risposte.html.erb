@@ -26,6 +26,42 @@
   -webkit-transition-duration: 0.4s;
   cursor: pointer;
 }
+#mipiacecount {
+    color: green;
+    font-size: 30px;
+    user-select: none;
+}
+#nonmipiacecount {
+    color: red;
+    font-size: 30px;
+    user-select: none;
+}
+i[id^="mipiacebtn"] {
+    color: green;
+    font-size: 25px;
+    user-select: none;
+}
+#mipiacepressed {
+    color: #003311;
+    font-size: 25px;
+    user-select: none;
+}
+#nonmipiacepressed {
+    color:#660000;
+}
+i[id^="mipiacebtn"]:hover{
+    color:#003311;
+    font-size: 25px;
+    user-select: none;
+}
+i[id^="nonmipiacebtn"]{
+    color: red;
+    font-size: 25px;
+    user-select: none;
+}
+i[id^="nonmipiacebtn"]:hover{
+    color:#660000;
+}
 .usertag:hover {
     background-color: black;
 }
@@ -53,14 +89,29 @@
   <br>
   <%= risposte.content %>
   <br>
-  <%= link_to 'Modifica', edit_risposte_path %>
-  <br>
-   <b>Mi piace: </b> <%= risposte.likecount %>
-  <br>
-   <b> Non mi piace: </b> <%= risposte.nolikecount %>
-  <br>
+  <i class="fa fa-thumbs-up" id="mipiacecount"></i>  <b><font size="10"><%= risposte.voti_rs.where("voto=?", true).count %></font></b>
+<br>
+  <i class="fa fa-thumbs-down" id="nonmipiacecount"></i>  <b><font size="10"><%= risposte.voti_rs.where("voto=?", false).count %></font> </b>
   </div>
   <% if currentuser.admin? || currentuser==risposte.user %>
       <%= button_to "X", cancellarisposte_path(risposte.id), class: 'my-btn', method: :get %>
     <% end %>
+  <%= link_to vote_answer_path(risposte.user.id,risposte.id, 1) do %>
+  <i class="fa fa-thumbs-up" id="mipiacebtn<%= risposte.id.to_s %>"> </i>
+  <% end %>
+  <%= link_to vote_question_path(risposte.user.id,risposte.id, 0) do %>
+  <i class="fa fa-thumbs-down" id="nonmipiacebtn<%= risposte.id.to_s %>"></i>
+  <% end %>
+   <%= javascript_tag do %>
+    var btnlike=document.getElementById("mipiacebtn<%= risposte.id.to_s %>" );
+    var btndislike=document.getElementById("nonmipiacebtn<%= risposte.id.to_s %>" );
+
+    <% if !risposte.voti_rs.find_by(:user_id => currentuser.id).nil? %>
+       <% if !risposte.voti_rs.find_by(:user_id => currentuser.id).voto %>
+             btndislike.style.color="black";
+      <% else %>
+             btnlike.style.color="black";
+     <% end %>
+    <% end %>
+  <% end %>
 </body>

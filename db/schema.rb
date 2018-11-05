@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181104194120) do
+ActiveRecord::Schema.define(version: 20181105131845) do
 
   create_table "domandes", force: :cascade do |t|
     t.text "content"
@@ -134,6 +134,16 @@ ActiveRecord::Schema.define(version: 20181104194120) do
     t.datetime "updated_at", null: false
     t.index ["domande_id"], name: "index_voti_ds_on_domande_id"
     t.index ["user_id"], name: "index_voti_ds_on_user_id"
+  end
+
+  create_table "voti_rs", force: :cascade do |t|
+    t.boolean "voto"
+    t.integer "user_id"
+    t.integer "risposte_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["risposte_id"], name: "index_voti_rs_on_risposte_id"
+    t.index ["user_id"], name: "index_voti_rs_on_user_id"
   end
 
 end
