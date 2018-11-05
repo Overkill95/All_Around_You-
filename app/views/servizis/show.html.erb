@@ -29,6 +29,20 @@
         padding: 20px;
     }
 
+        #div_form2{
+        font-family: 'Merriweather', serif;
+	    color: black;
+	    width: 500px;
+	    margin: left;
+	    border: 3px solid black;
+	    position: relative;
+	    overflow: auto;
+	    text-align: left;
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+
 
     input[type=text], select {
     width: 100%;
@@ -49,7 +63,7 @@ input[type=text]:focus {
     border: none;
     color: #ff4d4d;
     padding: 7px 13px;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
 }
@@ -109,13 +123,15 @@ width: 100%;
       <br><br>
       <b>Descrizione: </b> <%= @servizi.descrizione %>
       <br><br>
+      <b> Voto medio recensioni: </b> <%= @servizi.mediavoti %>
+      <br><br>
       <b>Creato:</b> <%= time_ago_in_words(@servizi.created_at) %> ago
     </div>
     <br>
     <br>
     <%= button_to "+ Preferiti", aggiungi_path(@servizi.id), class: 'servizitag', method: :get %>
     <br><br>
-	<% if currentuser==@servizi.user %>
+	<% if currentuser.admin? || currentuser==@servizi.user %>
 	 <b> Cancella: </b> <%= button_to "X", cancellaservizi_path(@servizi), class: 'my-btn', method: :get  %>
 	<% end %>
       <span class="aggiungi">
@@ -123,11 +139,10 @@ width: 100%;
       </span>
       <div class="row-md-8" align="left">
 	<% if @servizi.recensionis.any? %>
-	  <h3>Numero Recensioni: (<%= @servizi.recensionis.count %>)</h3>
+	  <h3>Numero Recensioni: <%= @servizi.recensionis.count %></h3>
 	  <ol class="recensioni">
 	    <%= render @servizi.recensionis %>
 	  </ol>
-	  <%= will_paginate @recensionis %>
 	<% end %>
       </div>
 
@@ -156,16 +171,28 @@ width: 100%;
 
       <br>
       </section>
-  <div class="row-md-8" align="bottom-left">
+  <div class="domande" align="bottom-left">
     <% if @servizi.domandes.any? %>
-      <h3>Numero Domande: (<%= @servizi.domandes.count %>)</h3>
+      <h3>Numero Domande: <%= @servizi.domandes.count %></h3>
       <ol class="domande">
-         <%= render @servizi.domandes %>
+         <% @servizi.domandes.each do |d| %>
+           <%= render d %>
+                    <section class="risposte_form">
+                       <%= form_for(@risposte) do |f| %>
+                          <%=f.hidden_field 'domanda_id', :value => d.id %>
+                          <div class="field">
+                              <%= f.text_area :content, class: 'mycontent', placeholder: "Scrivi risposta" %>
+                         </div>
+                         <%= f.submit "Invia Risposta", class: "btn btn-primary" %>
+                      <% end %>
+                    </section>
+         <% end %>
       </ol>
       <%= will_paginate @domandes %>
     <% end %>
   </div>
-      <div id='div_form'>
+  <br> <br>
+      <div id='div_form2'>
 
 	    <section class="domande_form">
 	    <%= form_for(@domande) do |f| %>
@@ -177,9 +204,8 @@ width: 100%;
 	    <% end %>
 	    </section>
 
-      </div>
-
     </div>
+    <br> <br>
 
 	<div style='width: 800px;' >
             <div id='map' align="right" style='width: 400px; height: 400px; '></div>

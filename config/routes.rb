@@ -18,10 +18,7 @@ Rails.application.routes.draw do
   get    '/recensioni/:id/cancella' => 'recensionis#destroy', as: 'cancellarecensioni'
   get    '/servizi/:id/cancella'    => 'servizis#destroy', as: 'cancellaservizi'
   get    '/users/:id/cancella'      =>  'users#destroy', as: 'cancellautente'
-  post    '/domanda/:id/vote_up'     => 'domandes#vote_up', as: 'vote_up_question'
-  post    '/domanda/:id/vote_down'     => 'domandes#vote_down', as: 'vote_down_question'
-  post    '/risposta/:id/vote_up'     => 'rispostes#vote_up', as: 'vote_up_answer'
-  post    '/risposta/:id/vote_down'     => 'rispostes#vote_down', as: 'vote_down_answer'
+  get    '/domanda/:user_id/:domanda_id/:voto'     => 'voti_ds#create', as: 'vote_question'
   resources :users,                only: [:edit, :index, :update, :show, :new, :create]
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]

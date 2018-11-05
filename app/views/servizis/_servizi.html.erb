@@ -1,13 +1,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 .my-btn {
-    background-color:transparent; 
-    border: none; 
-    color: #ff4d4d; 
-    padding: 7px 13px; 
-    font-size: 30px; 
+    background-color:transparent;
+    border: none;
+    color: #ff4d4d;
+    padding: 7px 13px;
+    font-size: 30px;
     font-weight: bold;
-    cursor: pointer; 
+    cursor: pointer;
 }
 .my-btn2 {
     background-color: #145214;
@@ -18,13 +18,13 @@
     display: inline;
     font-size: 16px;
     font-weight: bold;
-    -webkit-transition-duration: 0.4s; 
+    -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
     border: 4px solid green;
     cursor: pointer;
 }
 .my-btn2:hover {
-    background-color: #0f3e0f; 
+    background-color: #0f3e0f;
     color: black;
 }
 /* Darker background on mouse-over */
@@ -47,7 +47,7 @@
   width: 15px;
   border: 4px solid green;
 }
-  
+
 .ico-mglass:after {
     content: "";
     height: 5px;
@@ -89,7 +89,7 @@
 <br>
  <b>Creato:</b> <%= time_ago_in_words(servizi.created_at) %> ago
 </div>
-    <% if currentuser==servizi.user %>
+    <% if currentuser.admin? || currentuser==servizi.user %>
       <%= button_to "X", cancellaservizi_path(servizi), class: 'my-btn', method: :get  %>
     <% end %>
 	<%= link_to servizi_path(servizi.id) do %>

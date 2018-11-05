@@ -1,15 +1,66 @@
-<li id="Risposte-<%= risposte.id %>">
-  <span class="nome"><%= link_to risposte.user.name, user_path(risposte.user)%></span>
-  <span class="nome"><%= link_to risposte.domande.servizi.nome, servizi_path(risposte.domande.servizi)%></span>
-  <span class="content"><%= risposte.content %></span>
-  <span class="modifica"><%= link_to 'Modifica', edit_risposte_path %></span>
-   <span class="mipiace"> Mi piace: (<%= risposte.likecount %>) </span>
-   <span class="nonmipiace"> Non mi piace: (<%= risposte.nolikecount %>) </span>
-   <span class="mipiacebutton"><%= button_to "Mi piace", vote_up_answer_path(risposte) %></span>
-   <span class="nonmipiacebutton"><%= button_to "Non mi piace", vote_down_answer_path(risposte) %></span>
-  <span class="timestamp">
-  <% if currentuser==risposte.user %>
-      <%= link_to "Cancella", cancellarisposte_path(risposte) %>
+<head>
+  <style>
+    #divrisposte{
+    font-family: 'Merriweather', serif;
+	    width: 500px;
+	    margin: left;
+	    border: 3px solid green;
+	    color:black;
+	    position: relative;
+	    overflow: auto;
+	    text-align: left;
+	    padding: 10px 10px;
+	    border-radius: 10px 10px 10px 10px;
+    }
+    .usertag {
+ background:url('https://dh3vbjnk0bnfa.cloudfront.net/static/centralauth/images/btn-login-hover.png') no-repeat 5px 5px #484B4F;
+  width: 100px;
+  align: right
+  padding:10px 20px 10px 0;
+  border-radius: 20%;
+  border: 2px solid white;
+  color:White;
+  font-size:14px;
+  text-align:center;
+  font-weight: bold;
+  -webkit-transition-duration: 0.4s;
+  cursor: pointer;
+}
+.usertag:hover {
+    background-color: black;
+}
+.my-btn {
+    background-color:transparent;
+    border: none;
+    color: #ff4d4d;
+    padding: 7px 13px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.my-btn:hover {
+    color: #990000;
+}
+  </style>
+</head>
+
+
+<body>
+
+
+<div id='divrisposte'>
+  <b> <%= risposte.user.name %>: </b> <span>  </span> <%= button_to "profilo", risposte.user, class: 'usertag', method: :get %>
+  <br>
+  <%= risposte.content %>
+  <br>
+  <%= link_to 'Modifica', edit_risposte_path %>
+  <br>
+   <b>Mi piace: </b> <%= risposte.likecount %>
+  <br>
+   <b> Non mi piace: </b> <%= risposte.nolikecount %>
+  <br>
+  </div>
+  <% if currentuser.admin? || currentuser==risposte.user %>
+      <%= button_to "X", cancellarisposte_path(risposte.id), class: 'my-btn', method: :get %>
     <% end %>
-  </span>
-</li>
+</body>

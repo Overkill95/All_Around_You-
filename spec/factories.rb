@@ -1,4 +1,9 @@
 FactoryGirl.define do
+  factory :voti_d do
+    voto 1
+    user nil
+    domande nil
+  end
   factory :user do
     id                    "1"
     name                  "Giggi"

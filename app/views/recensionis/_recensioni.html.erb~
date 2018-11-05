@@ -4,30 +4,61 @@
   <style>
     #div1{
     font-family: 'Merriweather', serif;
+	    width: 500px;
+	    margin: left;
+	    border: 3px solid black;
+	    color:black;
+	    position: relative;
+	    overflow: auto;
+	    text-align: left;
+	    padding: 10px 10px;
+	    border-radius: 10px 10px 10px 10px;
     }
+    .usertag {
+ background:url('https://dh3vbjnk0bnfa.cloudfront.net/static/centralauth/images/btn-login-hover.png') no-repeat 5px 5px #484B4F;
+  width: 100px;
+  align: right
+  padding:10px 20px 10px 0;
+  border-radius: 20%;
+  border: 2px solid white;
+  color:White;
+  font-size:14px;
+  text-align:center;
+  font-weight: bold;
+  -webkit-transition-duration: 0.4s;
+  cursor: pointer;
+}
+.usertag:hover {
+    background-color: black;
+}
+.my-btn {
+    background-color:transparent;
+    border: none;
+    color: #ff4d4d;
+    padding: 7px 13px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.my-btn:hover {
+    color: #990000;
+}
   </style>
 </head>
 
 
 <body>
   <div id='div1'>
-    <li id="Recensioni-<%= recensioni.id %>">
-      <b><span class="nome"><%= recensioni.titolo %></span></b>
-      <br><br>
-      <span class="content"><%= recensioni.content %></span>
-      <br><br>
-      <span class="voto"><%= recensioni.votoservizio %></span>
-      <br><br>
-      <span class="nome"><%= link_to recensioni.servizi.nome, recensioni.servizi%></span>
-      <span class="nome"><%= link_to recensioni.user.name, recensioni.user%></span>
-
-
-      <span class="timestamp">
-	<% if currentuser==recensioni.user %>
-	  <%= link_to "Cancella", cancellarecensioni_path(recensioni.id)  %>
+      <b> Utente: </b> <%= recensioni.user.name %><span>  </span> <%= button_to "profilo", recensioni.user, class: 'usertag', method: :get %>
+      <br>
+      <b>Titolo: </b><%= recensioni.titolo %>
+      <br>
+      <b> Voto: </b><%= recensioni.votoservizio %>
+      <br>
+      <%= recensioni.content %>
+      <br>
+    </div>
+	<% if currentuser.admin? || currentuser==recensioni.user %>
+	  <%= button_to "X", cancellarecensioni_path(recensioni.id), class:'my-btn', method: :get  %>
 	<% end %>
-      </span>
-    </li>
-  <div>
 </body>
->>>>>>> 13625b4cdfe4728655ada5c3e0fd373933173bab

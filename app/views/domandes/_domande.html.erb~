@@ -2,35 +2,9 @@
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     #mipiacecount {
-    color: green;
-    font-size: 60px;
+    color: #00b300;
+    font-size: 80px;
     user-select: none;
-}
-i[id^="mipiacebtn"] {
-    color: green;
-    font-size: 35px;
-    user-select: none;
-}
-#mipiacepressed {
-    color: #003311;
-    font-size: 35px;
-    user-select: none;
-}
-#nonmipiacepressed {
-    color:#660000;
-}
-i[id^="mipiacebtn"]:hover{
-    color:#003311;
-    font-size: 35px;
-    user-select: none;
-}
-i[id^="nonmipiacebtn"]{
-    color: red;
-    font-size: 35px;
-    user-select: none;
-}
-i[id^="nonmipiacebtn"]:hover{
-    color:#660000;
 }
 
     #divdomande{
@@ -46,8 +20,8 @@ i[id^="nonmipiacebtn"]:hover{
 	    border-radius: 10px 10px 10px 10px;
     }
 #nonmipiacecount {
-    color: red;
-    font-size: 60px;
+    color: #800000;
+    font-size: 80px;
     user-select: none;
 }
 
@@ -94,6 +68,9 @@ i[id^="nonmipiacebtn"]:hover{
 }
   </style>
 </head>
+
+
+
 <body>
 
 <div id='divdomande'>
@@ -101,31 +78,15 @@ i[id^="nonmipiacebtn"]:hover{
   <br>
   <%= domande.content %>
   <br>
-  <i class="fa fa-thumbs-up" id="mipiacecount"></i>  <b><font size="50"><%= domande.voti_ds.where("voto=?", true).count %></font></b>
-  <i class="fa fa-thumbs-down" id="nonmipiacecount"></i>  <b><font size="50"><%= domande.voti_ds.where("voto=?", false).count %></font> </b>
   <% if domande.rispostes.any? %>
+	         <i class="fa fa-thumbs-up" id="mipiacecount"></i> : <b><font size="50"><%= domande.voti_ds.where("voto=?", true).count %></font></b> 
+		 <i class="fa fa-thumbs-down" id="nonmipiacecount"></i> : <b><font size="50"><%= domande.voti_ds.where("voto=?", false).count %></font> </b>
                  <h3>Numero Risposte: <%= domande.rispostes.count %></h3>
                 <%= render domande.rispostes %>
              <% end %>
 </div>
-  <%= link_to vote_question_path(domande.user.id,domande.id, 1) do %>
-  <i class="fa fa-thumbs-up" id="mipiacebtn<%= domande.id.to_s %>"> </i>
-  <% end %>
-  <%= link_to vote_question_path(domande.user.id,domande.id, 0) do %>
-  <i class="fa fa-thumbs-down" id="nonmipiacebtn<%= domande.id.to_s %>"></i>
-  <% end %>
-   <%= javascript_tag do %>
-    var btnlike=document.getElementById("mipiacebtn<%= domande.id.to_s %>" );
-    var btndislike=document.getElementById("nonmipiacebtn<%= domande.id.to_s %>" );
-
-    <% if !domande.voti_ds.find_by(:user_id => currentuser.id).nil? %>
-       <% if !domande.voti_ds.find_by(:user_id => currentuser.id).voto %>
-             btndislike.style.color="black";
-      <% else %>
-             btnlike.style.color="black";
-     <% end %>
-    <% end %>
-  <% end %>
+  <%= button_to "Mi piace", vote_question_path(domande.user.id,domande.id, 1) %>
+   <%= button_to "Non mi piace", vote_question_path(domande.user.id,domande.id, 0) %>
   <% if currentuser.admin? || currentuser==domande.user %>
       <%= button_to "X", cancelladomande_path(domande.id), class: 'my-btn', method: :get %>
     <% end %>

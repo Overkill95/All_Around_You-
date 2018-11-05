@@ -1,12 +1,10 @@
-
-
 <head>
   <style>
-    #div1{
+    #divrisposte{
     font-family: 'Merriweather', serif;
 	    width: 500px;
 	    margin: left;
-	    border: 3px solid black;
+	    border: 3px solid green;
 	    color:black;
 	    position: relative;
 	    overflow: auto;
@@ -48,17 +46,23 @@
 
 
 <body>
-  <div id='div1'>
-      <b> Utente: </b> <%= recensioni.user.name %><span>  </span> <%= button_to "profilo", recensioni.user, class: 'usertag', method: :get %>
-      <br>
-      <b>Titolo: </b><%= recensioni.titolo %>
-      <br>
-      <b> Voto: </b><%= recensioni.votoservizio %>
-      <br>
-      <%= recensioni.content %>
-      <br>
-    </div>
-	<% if currentuser.admin? || currentuser==recensioni.user %>
-	  <%= button_to "X", cancellarecensioni_path(recensioni.id), class:'my-btn', method: :get  %>
-	<% end %>
+
+
+<div id='divrisposte'>
+  <b> <%= risposte.user.name %>: </b> <span>  </span> <%= button_to "profilo", risposte.user, class: 'usertag', method: :get %>
+  <br>
+  <%= risposte.content %>
+  <br>
+  <%= link_to 'Modifica', edit_risposte_path %>
+  <br>
+   <b>Mi piace: </b> <%= risposte.likecount %>
+  <br>
+   <b> Non mi piace: </b> <%= risposte.nolikecount %>
+  <br>
+   <%= button_to "Mi piace", vote_answer_path(risposte,risposte.domande, true) %>
+   <%= button_to "Non mi piace", vote_answer_path(risposte,risposte.domande, false) %>
+  </div>
+  <% if currentuser.admin? || currentuser==risposte.user %>
+      <%= button_to "X", cancellarisposte_path(risposte.id), class: 'my-btn', method: :get %>
+    <% end %>
 </body>

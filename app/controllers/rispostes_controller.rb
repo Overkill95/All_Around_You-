@@ -13,7 +13,7 @@ class RispostesController < ApplicationController
        @risposta.user=currentuser
        if @risposta.save
           flash[:success]= "risposta inserita con successo"
-          redirect_to @risposta.domande
+          redirect_to @risposta.domande.servizi
        else
           @feed_items = []
           render 'static_pages/home'
