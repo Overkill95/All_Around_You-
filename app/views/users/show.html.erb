@@ -23,12 +23,12 @@
 	    padding: 10px 10px;
 	    border-radius: 10px 10px 10px 10px;
           }
-	  
+
 	  #div02{
 	    font-family: 'Merriweather', serif;
 	    color:black;
 	  }
-	  
+
           a:link {
 	    font-family: 'Merriweather', serif;
 	    color: black;
@@ -45,10 +45,10 @@
   text-align:center;
   font-weight: bold;
   -webkit-transition-duration: 0.4s;
-  cursor: pointer; 
+  cursor: pointer;
 }
 .usertag:hover {
-    background-color: black; 
+    background-color: black;
 }
 .button_to,
 .button_to div {
@@ -90,7 +90,12 @@
 	      <strong>Email:</strong>
 	      <%= @user.email %>
 	    </p>
-
+	   <section class="stats">
+      <%= render 'shared/stats' %>
+	<% if logged_in? %>
+      <%= render 'follow_form' %>
+	<% end %>
+    </section>
       </div>
 
       <br><br>

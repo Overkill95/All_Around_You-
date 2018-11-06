@@ -1,0 +1,6 @@
+<% if @servizifollowing.any? %>
+  <ol class="servizi">
+    <%= render @servizifollowing %>
+  </ol>
+  <%= will_paginate @servizifollowing %>
+<% end %>

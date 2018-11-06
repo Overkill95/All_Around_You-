@@ -8,6 +8,10 @@ class User < ApplicationRecord
   has_many :voti_ds, dependent: :destroy
   has_many :voti_rs, dependent: :destroy
   has_many :votiservizis, dependent: :destroy
+  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :following, :through => :active_relationships, source: :followed
+  has_many  :followers, :through => :passive_relationships, source: :follower
   attr_accessor :remember_token, :reset_token
   before_save { self.email = email.downcase }
   before_create { create_activation_digest }
@@ -48,6 +52,15 @@ class User < ApplicationRecord
   def preferiti
     Favorite.where("user_id = ?", self.id)
   end
+  def follow(utente)
+    active_relationships.create(:followed_id => utente.id)
+  end
+  def unfollow(utente)
+    active_relationships.find_by(:followed_id => utente.id).destroy
+  end
+  def following?(other_user)
+      following.include?(other_user)
+  end
   #Modifica reset password digest
   def create_reset_digest
     self.reset_token = User.nuovotoken
@@ -76,6 +89,9 @@ class User < ApplicationRecord
   end
   def paswscaduta?
     reset_sent_at < 2.hours.ago
+  end
+  def feedfollowing
+     Servizi.where("user_id in (?)", self.following_ids)
   end
 
 end

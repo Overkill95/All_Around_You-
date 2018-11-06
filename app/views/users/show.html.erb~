@@ -64,7 +64,7 @@
 
 
 
-<body bgcolor='#8c8c8c'>
+<body bgcolor='#f2f2f2'>
 
       <% provide(:title, @user.name) %>
       <div class="row">
@@ -90,7 +90,12 @@
 	      <strong>Email:</strong>
 	      <%= @user.email %>
 	    </p>
-
+	   <section class="stats">
+      <%= render 'shared/stats' %>
+	<% if logged_in? && currentuser!=user %>
+      <%= render 'follow_form' %>
+	<% end %> 
+    </section> 
       </div>
 
       <br><br>

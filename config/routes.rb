@@ -20,14 +20,20 @@ Rails.application.routes.draw do
   get    '/users/:id/cancella'      =>  'users#destroy', as: 'cancellautente'
   get    '/domanda/:user_id/:domanda_id/:voto'     => 'voti_ds#create', as: 'vote_question'
   get    '/risposta/:user_id/:risposta_id/:voto'     => 'voti_rs#create', as: 'vote_answer'
-  get    '/servizi/:user_id/:servizi_id/:voto'     => 'votiservizis#create', as: 'vote_servizio' 
-  resources :users,                only: [:edit, :index, :update, :show, :new, :create]
+  get    '/servizi/:user_id/:servizi_id/:voto'     => 'votiservizis#create', as: 'vote_servizio'
+  get  '/relationships/:id' => 'relationships#destroy', as: 'cancellafollow'
+  resources :users,                only: [:edit, :index, :update, :show, :new, :create] do
+	member do
+           get :following, :followers
+        end
+  end
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :servizis,          only: [:create, :show, :index]
   resources :recensionis,       only: [:create]
   resources :domandes,          only: [:create, :edit, :update, :show]
   resources :rispostes,          only: [:create, :edit, :update, :show]
+  resources :relationships,       only: [:create]
   resources :ricerches,          only: [:create, :destroy]
   resource :session, only: [:create]
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

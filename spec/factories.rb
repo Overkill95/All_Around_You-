@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  factory :relationship do
+    follower_id 1
+    followed_id 1
+  end
   factory :votiservizi do
     voto false
     user nil

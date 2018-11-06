@@ -6,6 +6,7 @@ class StaticPagesController < ApplicationController
     if !@user.nil?
       @servizi = currentuser.servizis.build if logged_in?
       @serviziutente = currentuser.feed.paginate(page: params[:page])
+      @servizifollowing = currentuser.feedfollowing.paginate(page: params[:page]) if logged_in?
     end
   end
   def help

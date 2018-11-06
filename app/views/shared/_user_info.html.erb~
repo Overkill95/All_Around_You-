@@ -36,4 +36,7 @@
 <td>Numero Servizi: <%= currentuser.servizis.count %> </td>
 </tr>
 </table>
+<section class="stats">
+        <%= render 'shared/stats' %>
+      </section>
 </div>

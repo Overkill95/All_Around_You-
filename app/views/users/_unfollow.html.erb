@@ -1,0 +1,33 @@
+<style>
+.unfollow {
+ background:url('https://dh3vbjnk0bnfa.cloudfront.net/static/centralauth/images/btn-login-hover.png') no-repeat 5px 5px #484B4F;
+  width: 85px;
+  height: 30px;
+  align: right
+  padding:10px 20px 10px 0;
+  background-color: #e60000;
+  border-radius: 40%;
+  border: 3px solid black;
+  color:White;
+  font-size:14px;
+  text-align:center;
+  font-weight: bold;
+  display: inline-block
+  -webkit-transition-duration: 0.4s;
+  cursor: pointer;
+}
+.unfollow:hover {
+    background-color: #660000;
+}
+.unfollow div{
+ display: inline;
+ }
+ .button_to,
+.button_to div {
+  display: inline;
+}
+</style>
+
+
+
+<%= button_to "Unfollow", cancellafollow_path(currentuser.active_relationships.find_by(followed_id: @user.id)), class: 'unfollow', method: :get  %>

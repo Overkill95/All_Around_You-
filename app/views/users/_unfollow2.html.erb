@@ -1,0 +1,3 @@
+<%= form_for(currentuser.active_relationships.find_by(followed_id: user.id), :url => {:controller => "relationships", :action => "destroy"}, remote: true) do |f| %>
+  <%= f.submit "Unfollow", class: "btn" %>
+<% end %>

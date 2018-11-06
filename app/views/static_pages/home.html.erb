@@ -30,19 +30,6 @@
 	    border-radius: 10px 10px 10px 10px;
           }
 
-          #div03{
-	    font-family: 'Merriweather', serif;
-	    width: 900px;
-	    margin: left;
-	    border: 3px solid red;
-	    color:black;
-	    position: relative;
-	    overflow: auto;
-	    text-align: left;
-	    padding: 10px 10px;
-	    border-radius: 10px 10px 10px 10px;
-          }
-
           #div04{
 	    font-family: 'Merriweather', serif;
 	    width: 500px;
@@ -91,7 +78,7 @@
   	cursor: pointer;
 	}
 	.favoritebutton:hover {
-    background-color: black; 
+    background-color: black;
 }
 
     </style>
@@ -119,9 +106,13 @@
 
 	<br>
 
-	<div id='div03' class="col-md-8">
+	<div id='div03' class="col-md-8" align="left">
 	  <h3>Servizi erogati:</h3>
 	  <%= render 'shared/feed' %>
+	</div>
+    <div id='divfollowing' class="col-md-8" align="left">
+	  <h3>Servizi utenti seguiti:</h3>
+	  <%= render 'shared/feedutentiseguiti' %>
 	</div>
 
 	<br>

@@ -1,0 +1,35 @@
+<style>
+.follow {
+ background:url('https://dh3vbjnk0bnfa.cloudfront.net/static/centralauth/images/btn-login-hover.png') no-repeat 5px 5px #484B4F;
+  width: 70px;
+  height: 30px;
+  align: right
+  padding:10px 20px 10px 0;
+  background-color: #00ff00;
+  border-radius: 40%;
+  border: 3px solid black;
+  color:White;
+  font-size:14px;
+  text-align:center;
+  font-weight: bold;
+  -webkit-transition-duration: 0.4s;
+   display: inline
+  cursor: pointer;
+}
+.follow:hover {
+    background-color: #004d00;
+}
+.follow div{
+ display: inline;
+ }
+ .button_to,
+.button_to div {
+  display: inline;
+}
+</style>
+
+
+<%= form_for(currentuser.active_relationships.build, remote: true) do |f| %>
+  <div><%= hidden_field_tag :followed_id, @user.id %></div>
+  <%= f.submit "Follow", class: "follow" %>
+<% end %>

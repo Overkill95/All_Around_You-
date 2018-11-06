@@ -15,56 +15,29 @@
 
 .profilo {
  background:url('https://dh3vbjnk0bnfa.cloudfront.net/static/centralauth/images/btn-login-hover.png') no-repeat 5px 5px #484B4F;
-  width: 80px;
-  height: 30px;
+  width: 100px;
+  height: 50px;
   align: right
   padding:10px 20px 10px 0;
-  border-radius: 40%;
-  border: 3px solid black;
+  border-radius: 20%;
+  border: 2px solid white;
   color:White;
   font-size:14px;
   text-align:center;
   font-weight: bold;
-  display: inline-block
   -webkit-transition-duration: 0.4s;
   cursor: pointer;
 }
 .profilo:hover {
     background-color: black;
 }
-.adminbtn {
- background:url('https://dh3vbjnk0bnfa.cloudfront.net/static/centralauth/images/btn-login-hover.png') no-repeat 5px 5px #484B4F;
-  width: 80px;
-  height: 30px;
-  align: right
-  padding:10px 20px 10px 0;
-  background-color: #cccc00;
-  border-radius: 40%;
-  border: 3px solid black;
-  color:White;
-  font-size:14px;
-  text-align:center;
-  font-weight: bold;
-  display: inline-block
-  -webkit-transition-duration: 0.4s;
-  cursor: pointer;
-}
-.adminbtn:hover {
-    background-color: #808000;
-}
 .button_to,
 .button_to div {
   display: inline;
+  align:right;
 }
 .admin{
   color:green;
-}
-.profilo.follow.unfollow{
-  display: flex;
-  flex-direction: row;
-}
-.sameline div{
-  display: inline-block;
 }
 </style>
 <li>
@@ -76,21 +49,17 @@
   <% end %>
   </span>
   <br>
-  <div class="sameline">
   <%= button_to "profilo", user, class: 'profilo', method: :get %>
   <% if currentuser.admin? && currentuser!=user %>
-    <%= button_to "Admin", rendiadmin_path(user), class: 'adminbtn', method: :get  %>
+    <%= button_to "Make Admin", rendiadmin_path(user), class: 'profilo', method: :get  %>
   <% end %>
-  <% @user=user %>
-      <% if logged_in? %>
-      <%= render 'follow_form' %>
-	<% end %>
   <% if currentuser.admin? || currentuser==user %>
     <%= button_to "X", cancellautente_path(user), class: 'my-btn', method: :get  %>
   <% end %>
   <%= render 'shared/stats' %>
-  </div>
-  <br>
+  <% if logged_in? && currentuser!=user %>
+      <%= render 'follow_form' %>
+	<% end %> 
 </li>
 <br>
 <br>
