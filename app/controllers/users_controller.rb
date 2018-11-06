@@ -46,8 +46,13 @@ class UsersController < ApplicationController
     @user=User.find(params[:id])
   end
   def rendiadmin
+    @cuser=currentuser
     @user=User.find_by(id: params[:id])
-    @user.update_attributes(:admin=> true)
+    if !@user.admin?
+       @user.update_attributes(:admin=> true)
+    else
+       @user.update_attributes(:admin=> false)
+    end
     redirect_to users_path
   end
   # POST /users

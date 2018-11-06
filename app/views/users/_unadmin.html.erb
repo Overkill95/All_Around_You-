@@ -1,0 +1,24 @@
+<style>
+.adminbtn2 {
+ background:url('https://dh3vbjnk0bnfa.cloudfront.net/static/centralauth/images/btn-login-hover.png') no-repeat 5px 5px #484B4F;
+  width: 125px;
+  height: 30px;
+  align: right
+  padding:10px 20px 10px 0;
+  background-color: #e60000;
+  border-radius: 40%;
+  border: 3px solid black;
+  color:White;
+  font-size:14px;
+  text-align:center;
+  font-weight: bold;
+  display: inline-block
+  -webkit-transition-duration: 0.4s;
+  cursor: pointer;
+}
+.adminbtn2:hover {
+    background-color: #660000;
+}
+</style>
+
+<%= button_to "Rimuovi Admin", rendiadmin_path(@user), class: 'adminbtn2', method: :get  %>

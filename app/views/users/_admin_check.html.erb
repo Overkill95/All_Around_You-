@@ -1,0 +1,9 @@
+<% if currentuser.admin? %>
+  <div id="admin_form<%=@user.id %>">
+  <% if @user.admin? %>
+    <%= render 'unadmin' %>
+  <% else %>
+    <%= render 'admin' %>
+  <% end %>
+  </div>
+<% end %>

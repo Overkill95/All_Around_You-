@@ -67,6 +67,7 @@
   display: inline-block;
 }
 </style>
+
 <li>
   <span><%= gravatar_for user%> </span>
   <span><b> Nickname: </b> <%= user.name %></span>
@@ -77,15 +78,15 @@
   </span>
   <br>
   <div class="sameline">
+   <% @user=user %>
   <%= button_to "profilo", user, class: 'profilo', method: :get %>
-  <% if currentuser.admin? && currentuser!=user %>
-    <%= button_to "Admin", rendiadmin_path(user), class: 'adminbtn', method: :get  %>
+  <% if currentuser!=user %>
+    <%= render 'admin_check' %>
   <% end %>
-  <% @user=user %>
       <% if logged_in? %>
       <%= render 'follow_form' %>
 	<% end %>
-  <% if currentuser.admin? || currentuser==user %>
+  <% if logged_in? && currentuser.admin? || currentuser==user %>
     <%= button_to "X", cancellautente_path(user), class: 'my-btn', method: :get  %>
   <% end %>
   <%= render 'shared/stats' %>
